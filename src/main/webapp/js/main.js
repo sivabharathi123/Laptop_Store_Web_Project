@@ -1,5 +1,6 @@
-$(function() {
+$(document).ready(function() {
 	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
+	navigateToSection('home');
 
 	$('#navbar a').click(function(e) {
 		e.preventDefault();
@@ -22,11 +23,10 @@ $(function() {
 			case 'contact':
 				loadContactForm();
 				break;
-			case 'home':
+			default:
 				$('#main-content').html('<h2>Welcome to Our Laptop Store</h2>');
 				break;
-			default:
-				$('#main-content').html('<h2>Error: Section not found.</h2>');
+			
 		}
 	}
 
@@ -67,6 +67,8 @@ $(function() {
 			}
 		});
 	}
+
+
 
 	window.deleteProduct = function(id) {
 		if (confirm('Are you sure you want to delete this product?')) {
@@ -391,5 +393,32 @@ function filterProducts() {
 	});
 }
 
+function addProduct() {
+	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
+    var laptop = {
+        prodtype: $('#prodtype').val(),
+        model: $('#model').val(),
+        brand: $('#brand').val(),
+        price: $('#price').val(),
+        processor: $('#processor').val(),
+        ram: $('#ram').val(),
+        harddrive: $('#harddrive').val(),
+        thumbnail_url: $('#thumbnail_url').val()
+    };
+
+    $.ajax({
+        url: apiUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(laptop),
+        success: function() {
+            $('#addProductModal').modal('hide'); // Hide the modal
+            loadProductsAdmin(); // Reload the list of products
+        },
+        error: function() {
+            alert('Error adding product.');
+        }
+    });
+}
 
 

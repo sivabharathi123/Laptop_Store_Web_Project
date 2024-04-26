@@ -24,7 +24,9 @@ $(document).ready(function() {
 				loadContactForm();
 				break;
 			default:
-				$('#main-content').html(`<h2>Welcome to Our Laptop Store</h2>
+				$('#main-content').html(`
+				<div class="container">
+				<h2>Welcome to Our Laptop Store</h2>
 				<br>
 				<br>
 				<h3> Click on Products to see all available laptops </h3>
@@ -35,6 +37,7 @@ $(document).ready(function() {
 				<br>
 				<h3> Click on Contact Us to let us know you feedback or enquiries <h3>
 				<br>
+				</div>
 				`);
 				break;
 

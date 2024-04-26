@@ -176,37 +176,175 @@ $(document).ready(function() {
 
 	function loadContactForm() {
 		let contactHtml = `
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea><br>
-                <button type="submit">Send</button>
-            </form>
+			<h2>Contact Us</h2>
+			<form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/mnqelebb" method="post">
+  				<fieldset id="fs-frm-inputs">
+			    <label for="full-name">Full Name</label>
+			    <input type="text" name="name" id="full-name" placeholder="First and Last" required="">
+			    <label for="email-address">Email Address</label>
+			    <input type="email" name="_replyto" id="email-address" placeholder="email@tus.ie" required="">
+			    <label for="message">Message</label>
+			    <textarea rows="3" name="message" id="message" placeholder="Type your message you want to convey to us, here." required=""></textarea>
+			    <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+			  </fieldset>
+			  <input type="submit" value="Submit">
+</form><style>/* reset */
+#fs-frm input,
+#fs-frm select,
+#fs-frm textarea,
+#fs-frm fieldset,
+#fs-frm optgroup,
+#fs-frm label,
+#fs-frm #card-element:disabled {
+  font-family: inherit;
+  font-size: 100%;
+  color: inherit;
+  border: none;
+  border-radius: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+#fs-frm label,
+#fs-frm legend,
+#fs-frm ::placeholder {
+  font-size: .825rem;
+  margin-bottom: .5rem;
+  padding-top: .2rem;
+  display: flex;
+  align-items: baseline;
+}
+
+/* border, padding, margin, width */
+#fs-frm input,
+#fs-frm select,
+#fs-frm textarea,
+#fs-frm #card-element {
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: rgba(255,255,255,0.9);
+  padding: .75em 1rem;
+  margin-bottom: 1.5rem;
+}
+#fs-frm input:focus,
+#fs-frm select:focus,
+#fs-frm textarea:focus {
+  background-color: white;
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: gray;
+  outline-offset: -1px;
+}
+#fs-frm [type="text"],
+#fs-frm [type="email"] {
+  width: 100%;
+}
+#fs-frm [type="button"],
+#fs-frm [type="submit"],
+#fs-frm [type="reset"] {
+  width: auto;
+  cursor: pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+}
+#fs-frm [type="button"]:focus,
+#fs-frm [type="submit"]:focus,
+#fs-frm [type="reset"]:focus {
+  outline: none;
+}
+#fs-frm [type="submit"],
+#fs-frm [type="reset"] {
+  margin-bottom: 0;
+}
+#fs-frm select {
+  text-transform: none;
+}
+
+#fs-frm [type="checkbox"] {
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  appearance: checkbox;
+  display: inline-block;
+  width: auto;
+  margin: 0 .5em 0 0 !important;
+}
+
+#fs-frm [type="radio"] {
+  -webkit-appearance: radio;
+  -moz-appearance: radio;
+  appearance: radio;
+}
+
+/* address, locale */
+#fs-frm fieldset.locale input[name="city"],
+#fs-frm fieldset.locale select[name="state"],
+#fs-frm fieldset.locale input[name="postal-code"] {
+  display: inline;
+}
+#fs-frm fieldset.locale input[name="city"] {
+  width: 52%;
+}
+#fs-frm fieldset.locale select[name="state"],
+#fs-frm fieldset.locale input[name="postal-code"] {
+  width: 20%;
+}
+#fs-frm fieldset.locale input[name="city"],
+#fs-frm fieldset.locale select[name="state"] {
+  margin-right: 3%;
+}
+</style>
+
         `;
 		$('#main-content').html(contactHtml);
-
-		$('#contactForm').submit(function(e) {
-			e.preventDefault();
-			sendContactForm();
-		});
+		
+		
+//
+//		$('#contactForm').submit(function(e) {
+//    e.preventDefault(); // Prevent default form submission
+//
+//    var formData = {
+//        'name': $('#name').val(),
+//        'email': $('#email').val(),
+//        'message': $('#message').val()
+//    };
+//
+//    $.ajax({
+//        type: 'POST',
+//        url: 'https://script.google.com/macros/s/AKfycbxZI0mSKS64TuaCvb53uwmWTUU1KuLXJyAK6sBS8-CPzcdghobLo_pKgIqzl_w-pO3xKQ/exec', // Googel App endpoint URL
+//        data: formData,
+//        success: function(response) {
+//            console.log(response);
+//            alert('Form submitted successfully!');
+//            $('#contactForm').trigger("reset"); // reset form after submission
+//        },
+//        error: function() {
+//            alert('Error submitting form');
+//        }
+//    });
+//});
+		
+		
 	}
 
-	function sendContactForm() {
-		const formData = {
-			name: $('#name').val(),
-			email: $('#email').val(),
-			message: $('#message').val()
-		};
 
-		// Simulated sending process (add actual AJAX call here)
-		console.log('Sending contact form:', formData);
-		alert('Thank you for your message, ' + formData.name + '!');
-		$('#main-content').html('<h2>Message Received</h2><p>We will contact you soon.</p>');
-	}
+
+
+
+//	function sendContactForm() {
+//		const formData = {
+//			name: $('#name').val(),
+//			email: $('#email').val(),
+//			message: $('#message').val()
+//		};
+//
+//		// Simulated sending process (add actual AJAX call here)
+//		console.log('Sending contact form:', formData);
+//		alert('Thank you for your message, ' + formData.name + '!');
+//		$('#main-content').html('<h2>Message Received</h2><p>We will contact you soon.</p>');
+//	}
 });
 
 // Function to display the Bootstrap modal for editing a product

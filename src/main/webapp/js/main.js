@@ -30,20 +30,20 @@ $(function() {
 		}
 	}
 
-function loadProducts() {
-    $.ajax({
-        url: apiUrl,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            let contentHtml = '<h2>Products</h2>';
-            contentHtml += `<div class="row justify-content-end">
+	function loadProducts() {
+		$.ajax({
+			url: apiUrl,
+			type: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				let contentHtml = '<h2>Products</h2>';
+				contentHtml += `<div class="row justify-content-end">
                                 <div class="col-auto">
                                     <input type="text" id="searchBox" class="form-control" placeholder="Search..." onkeyup="filterProducts()">
                                 </div>
                             </div><div class="row">`; // Adding a search box
-            data.forEach(function(laptop) {
-                contentHtml += `
+				data.forEach(function(laptop) {
+					contentHtml += `
                     <div class="col-md-3 product-card" data-brand="${laptop.brand.toLowerCase()}" data-model="${laptop.model.toLowerCase()}">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top" src="${laptop.thumbnail_url}" alt="Laptop image" style="height: 225px; width: 100%; display: block;">
@@ -58,49 +58,49 @@ function loadProducts() {
                             </div>
                         </div>
                     </div>`;
-            });
-            contentHtml += '</div>'; // End of Bootstrap row
-            $('#main-content').html(contentHtml);
-        },
-        error: function() {
-            $('#main-content').html('<h2>Error loading products.</h2>');
-        }
-    });
-}
+				});
+				contentHtml += '</div>'; // End of Bootstrap row
+				$('#main-content').html(contentHtml);
+			},
+			error: function() {
+				$('#main-content').html('<h2>Error loading products.</h2>');
+			}
+		});
+	}
 
-////old code before search
-//	function loadProducts() {
-//		$.ajax({
-//			url: apiUrl,
-//			type: 'GET',
-//			dataType: 'json',
-//			success: function(data) {
-//				let contentHtml = '<h2>Products</h2><div class="row">'; // Start of Bootstrap row
-//				data.forEach(function(laptop) {
-//					contentHtml += `
-//                    <div class="col-md-3">
-//                        <div class="card mb-4 box-shadow">
-//                            <img class="card-img-top" src="${laptop.thumbnail_url}" alt="Laptop image" style="height: 225px; width: 100%; display: block;">
-//                            <div class="card-body">
-//                                <p class="card-text">${laptop.prodtype}</p>
-//                                <p class="card-text">Model: ${laptop.model}</p>
-//                                <p class="card-text">Brand: ${laptop.brand}</p>
-//                                <p class="card-text">Processor: ${laptop.processor}</p>
-//                                <p class="card-text">RAM: ${laptop.ram}</p>
-//                                <p class="card-text">Hard Drive: ${laptop.harddrive}</p>
-//                                <p class="card-text">Price: $${laptop.price}</p>
-//                            </div>
-//                        </div>
-//                    </div>`;
-//				});
-//				contentHtml += '</div>'; // End of Bootstrap row
-//				$('#main-content').html(contentHtml);
-//			},
-//			error: function() {
-//				$('#main-content').html('<h2>Error loading products.</h2>');
-//			}
-//		});
-//	}
+	////old code before search
+	//	function loadProducts() {
+	//		$.ajax({
+	//			url: apiUrl,
+	//			type: 'GET',
+	//			dataType: 'json',
+	//			success: function(data) {
+	//				let contentHtml = '<h2>Products</h2><div class="row">'; // Start of Bootstrap row
+	//				data.forEach(function(laptop) {
+	//					contentHtml += `
+	//                    <div class="col-md-3">
+	//                        <div class="card mb-4 box-shadow">
+	//                            <img class="card-img-top" src="${laptop.thumbnail_url}" alt="Laptop image" style="height: 225px; width: 100%; display: block;">
+	//                            <div class="card-body">
+	//                                <p class="card-text">${laptop.prodtype}</p>
+	//                                <p class="card-text">Model: ${laptop.model}</p>
+	//                                <p class="card-text">Brand: ${laptop.brand}</p>
+	//                                <p class="card-text">Processor: ${laptop.processor}</p>
+	//                                <p class="card-text">RAM: ${laptop.ram}</p>
+	//                                <p class="card-text">Hard Drive: ${laptop.harddrive}</p>
+	//                                <p class="card-text">Price: $${laptop.price}</p>
+	//                            </div>
+	//                        </div>
+	//                    </div>`;
+	//				});
+	//				contentHtml += '</div>'; // End of Bootstrap row
+	//				$('#main-content').html(contentHtml);
+	//			},
+	//			error: function() {
+	//				$('#main-content').html('<h2>Error loading products.</h2>');
+	//			}
+	//		});
+	//	}
 
 	//
 	//    function loadProducts() {
@@ -132,172 +132,45 @@ function loadProducts() {
 	//        });
 	//    }
 
+	//to unblock after checking
 
-	function loadProductsAdmin() {
-		$.ajax({
-			url: apiUrl,
-			type: 'GET',
-			dataType: 'json',
-			success: function(data) {
-				let contentHtml = '<h2>Products Dashboard</h2>';
-				contentHtml += '<div>Total Laptops: ' + data.length + '</div>'; // Dummy summary
-				contentHtml += '<table class="table table-hover"><thead><tr>';
-				contentHtml += '<th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Pic URL</th><th>Actions</th></tr></thead><tbody>';
-				data.forEach(function(laptop) {
-					contentHtml += `<tr>
-                                    <td>${laptop.prodtype}</td>
-                                    <td>${laptop.model}</td>
-                                    <td>${laptop.brand}</td>
-                                    <td>$${laptop.price}</td>
-                                    <td>${laptop.processor}</td>
-                                    <td>${laptop.ram}</td>
-                                    <td>${laptop.harddrive}</td>
-                                    <td>${laptop.thumbnail_url}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary edit-btn" data-id="${laptop.id}">Edit</button>
-                                        <button class="btn btn-danger" onclick="deleteProduct(${laptop.id})">Delete</button>
-                                        
-                                    </td>
-                                </tr>`;
-				});
-				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop </button>';
-				$('#main-content').html(contentHtml);
-				setupAddProductModal();
-			},
-			error: function() {
-				$('#main-content').html('<h2>Error loading products.</h2>');
-			}
-		});
-	}
-
-
-	//
-	//
 	//	function loadProductsAdmin() {
-	//    $.ajax({
-	//        url: apiUrl,
-	//        type: 'GET',
-	//        dataType: 'json',
-	//        success: function(data) {
-	//            let contentHtml = '<h2>Products</h2><div class="row">'; // Start of Bootstrap row
-	//            data.forEach(function(laptop) {
-	//                contentHtml += `
-	//                    <div class="col-md-3">
-	//                        <div class="card mb-4 box-shadow">
-	//                            <img class="card-img-top" src="${laptop.thumbnail_url}" alt="Laptop image" style="height: 225px; width: 100%; display: block;">
-	//                            <div class="card-body">
-	//                                <p class="card-text">${laptop.prodtype}</p>
-	//                                <p class="card-text">Model: ${laptop.model}</p>
-	//                                <p class="card-text">Brand: ${laptop.brand}</p>
-	//                                <p class="card-text">Processor: ${laptop.processor}</p>
-	//                                <p class="card-text">RAM: ${laptop.ram}</p>
-	//                                <p class="card-text">Hard Drive: ${laptop.harddrive}</p>
-	//                                <p class="card-text">Price: $${laptop.price}</p>
-	//                                <div class="d-flex justify-content-between align-items-center">
-	//                                    <div class="btn-group">
-	//                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="editProduct(${laptop.id})">Edit</button>
-	//                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deleteProduct(${laptop.id})">Delete</button>
-	//                                    </div>
-	//                                </div>
-	//                            </div>
-	//                        </div>
-	//                    </div>`;
-	//            });
-	//            contentHtml += '</div><button type="button" class="btn btn-sm btn-outline-secondary" onclick="addProduct()">Add New Laptop</button>'; // End of Bootstrap row
-	//            $('#main-content').html(contentHtml);
-	//        },
-	//        error: function() {
-	//            $('#main-content').html('<h2>Error loading products.</h2>');
-	//        }
-	//    });
-	//}
+	//		$.ajax({
+	//			url: apiUrl,
+	//			type: 'GET',
+	//			dataType: 'json',
+	//			success: function(data) {
+	//				let contentHtml = '<h2>Products Dashboard</h2>';
+	//				contentHtml += '<div>Total Laptops: ' + data.length + '</div>'; // Dummy summary
+	//				contentHtml += '<table class="table table-hover"><thead><tr>';
+	//				contentHtml += '<th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Pic URL</th><th>Actions</th></tr></thead><tbody>';
+	//				data.forEach(function(laptop) {
+	//					contentHtml += `<tr>
+	//                                    <td>${laptop.prodtype}</td>
+	//                                    <td>${laptop.model}</td>
+	//                                    <td>${laptop.brand}</td>
+	//                                    <td>$${laptop.price}</td>
+	//                                    <td>${laptop.processor}</td>
+	//                                    <td>${laptop.ram}</td>
+	//                                    <td>${laptop.harddrive}</td>
+	//                                    <td>${laptop.thumbnail_url}</td>
+	//                                    <td>
+	//                                        <button type="button" class="btn btn-primary edit-btn" data-id="${laptop.id}">Edit</button>
+	//                                        <button class="btn btn-danger" onclick="deleteProduct(${laptop.id})">Delete</button>
+	//                                        
+	//                                    </td>
+	//                                </tr>`;
+	//				});
+	//				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop </button>';
+	//				$('#main-content').html(contentHtml);
+	//				setupAddProductModal();
+	//			},
+	//			error: function() {
+	//				$('#main-content').html('<h2>Error loading products.</h2>');
+	//			}
+	//		});
+	//	}
 	//
-
-	//
-	//function loadProductsAdmin() {
-	//        $.ajax({
-	//            url: apiUrl,
-	//            type: 'GET',
-	//            dataType: 'json',
-	//            success: function(data) {
-	//                let contentHtml = '<h2>Products</h2><div class="products-container">';
-	//                data.forEach(function(laptop) {
-	//                    contentHtml += `
-	//                        <div class="product">
-	//                            <h3>${laptop.prodtype}</h3>
-	//                            <p>Model: ${laptop.model}</p>
-	//                            <p>Brand: ${laptop.brand}</p>
-	//                            <p>Procesor: ${laptop.processor}</p>
-	//                            <p>Ram: ${laptop.ram}</p>
-	//                            <p>Hard Drive: ${laptop.harddrive}</p>
-	//                            <p>Price: ${laptop.price}</p>
-	//                            <p>Picture: ${laptop.thumbnail_url}</p>
-	//                            <button onclick="editProduct(${laptop.id})">Edit</button>
-	//                            <button onclick="deleteProduct(${laptop.id})">Delete</button>
-	//
-	//                        </div>`;
-	//                });
-	//                contentHtml += '</div><button onclick="addProduct()">Add New Laptop</button>';
-	//                $('#main-content').html(contentHtml);
-	//            },
-	//            error: function() {
-	//                $('#main-content').html('<h2>Error loading products.</h2>');
-	//            }
-	//        });
-	//    }
-
-//	window.addProduct = function() {
-//		const laptop = {
-//			prodtype: prompt("Enter laptop Product Type:"),
-//			model: prompt("Enter laptop model:"),
-//			brand: prompt("Enter laptop brand:"),
-//			price: prompt("Enter laptop price:"),
-//			processor: prompt("Enter laptop processor:"),
-//			ram: prompt("Enter laptop ram:"),
-//			harddrive: prompt("Enter laptop harddrive:"),
-//			thumbnail_url: prompt("Enter laptop picture's url:")
-//		};
-//
-//		$.ajax({
-//			url: apiUrl,
-//			type: 'POST',
-//			contentType: 'application/json',
-//			data: JSON.stringify(laptop),
-//			success: function() {
-//				loadProductsAdmin();
-//			},
-//			error: function() {
-//				alert('Error adding product.');
-//			}
-//		});
-//	};
-
-	window.editProduct = function(id) {
-		const laptop = {
-			prodtype: prompt("Enter laptop's new Product Type:"),
-			model: prompt("Enter laptop's new model:"),
-			brand: prompt("Enter laptop's new brand:"),
-			price: Number(prompt("Enter laptop's new price:")),
-			processor: prompt("Enter laptop's new processor:"),
-			ram: prompt("Enter laptop's new ram:"),
-			harddrive: prompt("Enter laptop's new harddrive:"),
-			thumbnail_url: prompt("Enter laptop's new picture's url:")
-
-		};
-
-		$.ajax({
-			url: apiUrl + '/' + id,
-			type: 'PUT',
-			contentType: 'application/json',
-			data: JSON.stringify(laptop),
-			success: function() {
-				loadProductsAdmin();
-			},
-			error: function() {
-				alert('Error updating product.');
-			}
-		});
-	};
 
 	window.deleteProduct = function(id) {
 		if (confirm('Are you sure you want to delete this product?')) {
@@ -317,15 +190,85 @@ function loadProducts() {
 	function showAdminDashboard() {
 		if (!sessionStorage.getItem('isLoggedIn')) {
 			$('#main-content').html(`
-                <h2>Admin Dashboard</h2>
-                <p>You must log in to view this section.</p>
-                <button onclick="logIn()">Log In</button>
-            `);
+            <h2>Admin Dashboard</h2>
+            <p>You must log in to view this section.</p>
+            <button onclick="logIn()">Log In</button>
+        `);
 		} else {
-			$('#main-content').html('<h2>Admin Dashboard</h2><p>Manage your products here.</p>');
-			loadProductsAdmin();
+			
+
+			loadProductsAdmin(); // This will load the products as previously
 		}
 	}
+
+	//new after search
+	function loadProductsAdmin() {
+		$.ajax({
+			url: '/Laptop_Store_Web_Project/api/laptops',
+			type: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				$('#main-content').html('<h2>Welcome to the Admin Dashboard</h2>');
+				$('#main-content').append(`
+            <div class="card-deck mb-3 text-center">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Total Laptops</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title" id="totalLaptops">Loading...</h1>
+                        <small class="text-muted">in stock</small>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Laptops Sold</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">1540</h1>
+                        <small class="text-muted">units sold</small>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Sales Target</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">10000</h1>
+                        <small class="text-muted">target for the year</small>
+                    </div>
+                </div>
+            </div>
+        `);
+				let contentHtml = '<h2>Products</h2>';
+				contentHtml += '<table class="table"><thead><tr><th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Actions</th></tr></thead><tbody>';
+				data.forEach(function(laptop) {
+					contentHtml += `<tr><td>${laptop.prodtype}</td><td>${laptop.model}</td><td>${laptop.brand}</td><td>$${laptop.price}</td><td>${laptop.processor}</td><td>${laptop.ram}</td><td>${laptop.harddrive}</td><td><button class="btn btn-primary" onclick="showEditModal(${laptop.id})">Edit</button><button class="btn btn-danger" onclick="deleteProduct(${laptop.id})">Delete</button></td></tr>`;
+				});
+				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop </button>';
+				$('#main-content').append(contentHtml);
+			},
+			error: function() {
+				$('#main-content').html('<h2>Error loading products.</h2>');
+			}
+		});
+	}
+
+
+
+
+	//	function showAdminDashboard() {
+	//		if (!sessionStorage.getItem('isLoggedIn')) {
+	//			$('#main-content').html(`
+	//                <h2>Admin Dashboard</h2>
+	//                <p>You must log in to view this section.</p>
+	//                <button onclick="logIn()">Log In</button>
+	//            `);
+	//		} else {
+	//			$('#main-content').html('<h2>Admin Dashboard</h2><p>Manage your products here.</p>');
+	//			loadProductsAdmin();
+	//		}
+	//	}
 
 	window.logIn = function() {
 		const username = prompt("Enter username:");
@@ -448,7 +391,7 @@ function showEditModal(id) {
 	});
 }
 
-	//    window.editProduct = function(id) {
+//    window.editProduct = function(id) {
 //	function showEditModal(id) {
 //		const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
 //		// Fetch the product details from the server or from a local data structure
@@ -508,66 +451,66 @@ function showEditModal(id) {
 //			}
 //		});
 //	}
-	
 
-	// Function to save the product after editing
-	function saveProduct(id) {
-		const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
-		var laptop = {
-			prodtype: $('#editModal input[name="prodtype"]').val(),
-			model: $('#editModal input[name="model"]').val(),
-			brand: $('#editModal input[name="brand"]').val(),
-			price: $('#editModal input[name="price"]').val(),
-			processor: $('#editModal input[name="processor"]').val(),
-			ram: $('#editModal input[name="ram"]').val(),
-			harddrive: $('#editModal input[name="harddrive"]').val(),
-			thumbnail_url: $('#editModal input[name="thumbnail_url"]').val()
-		};
 
-		$.ajax({
-			url: apiUrl + '/' + id,
-			type: 'PUT',
-			contentType: 'application/json',
-			data: JSON.stringify(laptop),
-			success: function() {
-				$('#editModal').modal('hide');
-				loadProductsAdmin();
-			},
-			error: function() {
-				alert('Error updating product.');
-			}
-		});
-	}
-
-$(document).ready(function() {
-    $('body').on('click', '.edit-btn', function() {
-        var id = $(this).data('id');
-        showEditModal(id);
-    });
-
-    $('body').on('click', '.save-btn', function() {
-        var id = $(this).data('id');
-        saveProduct(id);
-    });
-});
-
-$(document).ready(function() {
-    console.log(typeof $.fn.modal);  // This should log 'function' if Bootstrap is loaded correctly
-});
-
-	function loadProductsAdmin() {
+// Function to save the product after editing
+function saveProduct(id) {
 	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
-		$.ajax({
-			url: apiUrl,
-			type: 'GET',
-			dataType: 'json',
-			success: function(data) {
-				let contentHtml = '<h2>Products Dashboard</h2>';
-				contentHtml += '<div>Total Laptops: ' + data.length + '</div>'; // Dummy summary
-				contentHtml += '<table class="table table-hover"><thead><tr>';
-				contentHtml += '<th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Actions</th></tr></thead><tbody>';
-				data.forEach(function(laptop) {
-					contentHtml += `<tr>
+	var laptop = {
+		prodtype: $('#editModal input[name="prodtype"]').val(),
+		model: $('#editModal input[name="model"]').val(),
+		brand: $('#editModal input[name="brand"]').val(),
+		price: $('#editModal input[name="price"]').val(),
+		processor: $('#editModal input[name="processor"]').val(),
+		ram: $('#editModal input[name="ram"]').val(),
+		harddrive: $('#editModal input[name="harddrive"]').val(),
+		thumbnail_url: $('#editModal input[name="thumbnail_url"]').val()
+	};
+
+	$.ajax({
+		url: apiUrl + '/' + id,
+		type: 'PUT',
+		contentType: 'application/json',
+		data: JSON.stringify(laptop),
+		success: function() {
+			$('#editModal').modal('hide');
+			loadProductsAdmin();
+		},
+		error: function() {
+			alert('Error updating product.');
+		}
+	});
+}
+
+$(document).ready(function() {
+	$('body').on('click', '.edit-btn', function() {
+		var id = $(this).data('id');
+		showEditModal(id);
+	});
+
+	$('body').on('click', '.save-btn', function() {
+		var id = $(this).data('id');
+		saveProduct(id);
+	});
+});
+
+$(document).ready(function() {
+	console.log(typeof $.fn.modal);  // This should log 'function' if Bootstrap is loaded correctly
+});
+
+function loadProductsAdmin() {
+	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
+	$.ajax({
+		url: apiUrl,
+		type: 'GET',
+		dataType: 'json',
+		success: function(data) {
+			let contentHtml = '<h2>Products Dashboard</h2>';
+			contentHtml += '<div>Total Laptops: ' + data.length + '</div>'; // Dummy summary
+			contentHtml += '<table class="table table-hover"><thead><tr>';
+			contentHtml += '<th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Actions</th></tr></thead><tbody>';
+			data.forEach(function(laptop) {
+				contentHtml += `<tr>
                                     <td>${laptop.prodtype}</td>
                                     <td>${laptop.model}</td>
                                     <td>${laptop.brand}</td>
@@ -581,56 +524,56 @@ $(document).ready(function() {
                                         
                                     </td>
                                 </tr>`;
-				});
-				contentHtml += '</tbody></table>';
-				$('#main-content').html(contentHtml);
-			},
-			error: function() {
-				$('#main-content').html('<h2>Error loading products.</h2>');
-			}
-		});
-	}
+			});
+			contentHtml += '</tbody></table>';
+			$('#main-content').html(contentHtml);
+		},
+		error: function() {
+			$('#main-content').html('<h2>Error loading products.</h2>');
+		}
+	});
+}
 
 
 function filterProducts() {
-    var searchText = $('#searchBox').val().toLowerCase();
-    $('.product-card').each(function() {
-        var brand = $(this).data('brand');
-        var model = $(this).data('model');
-        if (brand.includes(searchText) || model.includes(searchText)) {
-            $(this).show();
-        } else {
-            $(this).hide();
-        }
-    });
+	var searchText = $('#searchBox').val().toLowerCase();
+	$('.product-card').each(function() {
+		var brand = $(this).data('brand');
+		var model = $(this).data('model');
+		if (brand.includes(searchText) || model.includes(searchText)) {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
 }
 
 function addProduct() {
 	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
-    var laptop = {
-        prodtype: $('#prodtype').val(),
-        model: $('#model').val(),
-        brand: $('#brand').val(),
-        price: $('#price').val(),
-        processor: $('#processor').val(),
-        ram: $('#ram').val(),
-        harddrive: $('#harddrive').val(),
-        thumbnail_url: $('#thumbnail_url').val()
-    };
+	var laptop = {
+		prodtype: $('#prodtype').val(),
+		model: $('#model').val(),
+		brand: $('#brand').val(),
+		price: $('#price').val(),
+		processor: $('#processor').val(),
+		ram: $('#ram').val(),
+		harddrive: $('#harddrive').val(),
+		thumbnail_url: $('#thumbnail_url').val()
+	};
 
-    $.ajax({
-        url: apiUrl,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(laptop),
-        success: function() {
-            $('#addProductModal').modal('hide'); // Hide the modal
-            loadProductsAdmin(); // Reload the list of products
-        },
-        error: function() {
-            alert('Error adding product.');
-        }
-    });
+	$.ajax({
+		url: apiUrl,
+		type: 'POST',
+		contentType: 'application/json',
+		data: JSON.stringify(laptop),
+		success: function() {
+			$('#addProductModal').modal('hide'); // Hide the modal
+			loadProductsAdmin(); // Reload the list of products
+		},
+		error: function() {
+			alert('Error adding product.');
+		}
+	});
 }
 
 

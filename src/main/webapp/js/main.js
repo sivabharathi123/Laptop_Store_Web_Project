@@ -160,7 +160,7 @@ function loadProducts() {
                                     </td>
                                 </tr>`;
 				});
-				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop new</button><button type="button" class="btn btn-sm btn-outline-secondary" onclick="addProduct()">Add New Laptop</button>';
+				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop </button>';
 				$('#main-content').html(contentHtml);
 				setupAddProductModal();
 			},

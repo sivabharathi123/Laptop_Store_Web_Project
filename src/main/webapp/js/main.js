@@ -160,8 +160,9 @@ function loadProducts() {
                                     </td>
                                 </tr>`;
 				});
-				contentHtml += '</tbody></table><button type="button" class="btn btn-sm btn-outline-secondary" onclick="addProduct()">Add New Laptop</button>';
+				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop new</button><button type="button" class="btn btn-sm btn-outline-secondary" onclick="addProduct()">Add New Laptop</button>';
 				$('#main-content').html(contentHtml);
+				setupAddProductModal();
 			},
 			error: function() {
 				$('#main-content').html('<h2>Error loading products.</h2>');
@@ -245,31 +246,31 @@ function loadProducts() {
 	//        });
 	//    }
 
-	window.addProduct = function() {
-		const laptop = {
-			prodtype: prompt("Enter laptop Product Type:"),
-			model: prompt("Enter laptop model:"),
-			brand: prompt("Enter laptop brand:"),
-			price: prompt("Enter laptop price:"),
-			processor: prompt("Enter laptop processor:"),
-			ram: prompt("Enter laptop ram:"),
-			harddrive: prompt("Enter laptop harddrive:"),
-			thumbnail_url: prompt("Enter laptop picture's url:")
-		};
-
-		$.ajax({
-			url: apiUrl,
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(laptop),
-			success: function() {
-				loadProductsAdmin();
-			},
-			error: function() {
-				alert('Error adding product.');
-			}
-		});
-	};
+//	window.addProduct = function() {
+//		const laptop = {
+//			prodtype: prompt("Enter laptop Product Type:"),
+//			model: prompt("Enter laptop model:"),
+//			brand: prompt("Enter laptop brand:"),
+//			price: prompt("Enter laptop price:"),
+//			processor: prompt("Enter laptop processor:"),
+//			ram: prompt("Enter laptop ram:"),
+//			harddrive: prompt("Enter laptop harddrive:"),
+//			thumbnail_url: prompt("Enter laptop picture's url:")
+//		};
+//
+//		$.ajax({
+//			url: apiUrl,
+//			type: 'POST',
+//			contentType: 'application/json',
+//			data: JSON.stringify(laptop),
+//			success: function() {
+//				loadProductsAdmin();
+//			},
+//			error: function() {
+//				alert('Error adding product.');
+//			}
+//		});
+//	};
 
 	window.editProduct = function(id) {
 		const laptop = {
@@ -603,6 +604,35 @@ function filterProducts() {
         }
     });
 }
+
+function addProduct() {
+	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
+    var laptop = {
+        prodtype: $('#prodtype').val(),
+        model: $('#model').val(),
+        brand: $('#brand').val(),
+        price: $('#price').val(),
+        processor: $('#processor').val(),
+        ram: $('#ram').val(),
+        harddrive: $('#harddrive').val(),
+        thumbnail_url: $('#thumbnail_url').val()
+    };
+
+    $.ajax({
+        url: apiUrl,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(laptop),
+        success: function() {
+            $('#addProductModal').modal('hide'); // Hide the modal
+            loadProductsAdmin(); // Reload the list of products
+        },
+        error: function() {
+            alert('Error adding product.');
+        }
+    });
+}
+
 
 
 //                                <div class="d-flex justify-content-between align-items-center">

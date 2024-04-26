@@ -36,12 +36,35 @@ nav ul li a {
     min-height: 400px;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    flex: 1;
+}
+
+footer { /* Assuming your footer tag */
     background-color: #333;
     color: white;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+    text-align: center;
+    padding: 10px 0;
 }
+
+
+/*footer {*/
+/*    text-align: center;*/
+/*    padding: 10px 0;*/
+/*    background-color: #333;*/
+/*    color: white;*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    bottom: 0;*/
+/*}*/

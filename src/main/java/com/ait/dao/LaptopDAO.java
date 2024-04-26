@@ -14,25 +14,6 @@ import com.ait.laptops.Laptop;
 public class LaptopDAO {
 
 
-//    public List<Laptop> findAll() {
-//        List<Laptop> laptop = new ArrayList<>();
-//        Connection c = null;
-//        String sql = "SELECT * FROM laptops";
-//        try {
-//            c = ConnectionHelper.getConnection();
-//            Statement s = c.createStatement();
-//            ResultSet rs = s.executeQuery(sql);
-//            while (rs.next()) {
-//                laptop.add(processRow(rs));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        } finally {
-//            ConnectionHelper.close(c);
-//        }
-//        return laptop;
-//    }
     
     public List<Laptop> findAll() {
         List<Laptop> laptops = new ArrayList<>();
@@ -87,49 +68,6 @@ public class LaptopDAO {
     
     */
 
-    // //Following are old code that the resources were leaking.
-//    // Retrieve a laptop by its ID
-//    public Laptop findById(int id) {
-//        String sql = "SELECT * FROM laptops WHERE id = ?";
-//        Laptop laptop = null;
-//        Connection c = null;
-//        try {
-//            c = ConnectionHelper.getConnection();
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                laptop = processRow(rs);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        } finally {
-//            ConnectionHelper.close(c);
-//        }
-//        return laptop;
-//    }
-//
-//    public Laptop findByModel(String model) {
-//        Laptop laptop = null;
-//        Connection c = null;
-//        String sql = "SELECT * FROM laptops WHERE UPPER(Model) LIKE ? ORDER BY Model";
-//        try {
-//            c = ConnectionHelper.getConnection();
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setString(1, "%" + model.toUpperCase() + "%");
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                laptop = processRow(rs);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        } finally {
-//            ConnectionHelper.close(c);
-//        }
-//        return laptop;
-//    }
 
     public static void addLaptop(String prodtype, String model, String brand, double price, String processor, String ram, String harddrive, String thumbnail_url) {
         try (Connection conn = ConnectionHelper.getConnection()) {

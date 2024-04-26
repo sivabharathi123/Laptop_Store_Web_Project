@@ -345,21 +345,6 @@ $(document).ready(function() {
 	}
 
 
-
-
-
-	//	function sendContactForm() {
-	//		const formData = {
-	//			name: $('#name').val(),
-	//			email: $('#email').val(),
-	//			message: $('#message').val()
-	//		};
-	//
-	//		// Simulated sending process (add actual AJAX call here)
-	//		console.log('Sending contact form:', formData);
-	//		alert('Thank you for your message, ' + formData.name + '!');
-	//		$('#main-content').html('<h2>Message Received</h2><p>We will contact you soon.</p>');
-	//	}
 });
 
 // Function to display the Bootstrap modal for editing a product

@@ -24,9 +24,20 @@ $(document).ready(function() {
 				loadContactForm();
 				break;
 			default:
-				$('#main-content').html('<h2>Welcome to Our Laptop Store</h2>');
+				$('#main-content').html(`<h2>Welcome to Our Laptop Store</h2>
+				<br>
+				<br>
+				<h3> Click on Products to see all available laptops </h3>
+				<br>
+				<br>
+				<h3> Click on Admin Dashboard to manage laptop listings </h3>
+				<br>
+				<br>
+				<h3> Click on Contact Us to let us know you feedback or enquiries <h3>
+				<br>
+				`);
 				break;
-			
+
 		}
 	}
 
@@ -88,13 +99,13 @@ $(document).ready(function() {
 	function showAdminDashboard() {
 		if (!sessionStorage.getItem('isLoggedIn')) {
 			$('#main-content').html(`
-            <h2>Admin Dashboard</h2>
+			<div id="admin-header">Admin Dashboard</div>
             <p>You must log in to view this section.</p>
-            <button onclick="logIn()">Log In</button>
+            <button onclick="logIn()" class="btn btn-primary">Log In</button>
         `);
 		} else {
-			
-				
+
+
 
 			loadProductsAdmin(); // This will load the products as previously
 		}
@@ -107,41 +118,42 @@ $(document).ready(function() {
 			type: 'GET',
 			dataType: 'json',
 			success: function(data) {
-				$('#main-content').html('<h2>Welcome to the Admin Dashboard</h2>');
-			$('#main-content').append(`
-            <div class="card-deck mb-3 text-center">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Total Laptops</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title" id="totalLaptops">Loading...</h1>
-                        <small class="text-muted">in stock</small>
-                    </div>
-                </div>
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Laptops Sold</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">1540</h1>
-                        <small class="text-muted">units sold</small>
-                    </div>
-                </div>
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Sales Target</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">10000</h1>
-                        <small class="text-muted">target for the year</small>
-                    </div>
-                </div>
-            </div>
-        `);
+				$('#main-content').html('<div id="admin-header">Welcome to the Admin Dashboard</div>');
+		        $('#main-content').append(`
+		            <div class="card-deck mb-3 text-center">
+		                <div class="card mb-4 shadow-sm">
+		                    <div class="card-header1">
+		                        <h4 class="my-0 font-weight-normal">Total Laptops</h4>
+		                    </div>
+		                    <div class="card-body">
+		                        <h1 class="card-title pricing-card-title" id="totalLaptops">Loading...</h1>
+		                        <small class="text-muted">in stock</small>
+		                    </div>
+		                </div>
+		                <div class="card mb-4 shadow-sm">
+		                    <div class="card-header1">
+		                        <h4 class="my-0 font-weight-normal">Laptops Sold</h4>
+		                    </div>
+		                    <div class="card-body">
+		                        <h1 class="card-title pricing-card-title">1540</h1>
+		                        <small class="text-muted">units sold</small>
+		                    </div>
+		                </div>
+		                <div class="card mb-4 shadow-sm">
+		                    <div class="card-header1">
+		                        <h4 class="my-0 font-weight-normal">Sales Target</h4>
+		                    </div>
+		                    <div class="card-body">
+		                        <h1 class="card-title pricing-card-title">10000</h1>
+		                        <small class="text-muted">target for the year</small>
+		                    </div>
+		                </div>
+		            </div>
 				
+        `);
+
 				let contentHtml = '<h2>Products</h2>';
-				contentHtml += '<table class="table"><thead><tr><th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Thumbnail URL</th><th>Actions</th></tr></thead><tbody>';
+				contentHtml += '<table class="table table-striped"><thead><tr><th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Thumbnail URL</th><th>Actions</th></tr></thead><tbody>';
 				data.forEach(function(laptop) {
 					contentHtml += `<tr><td>${laptop.prodtype}</td><td>${laptop.model}</td><td>${laptop.brand}</td><td>$${laptop.price}</td><td>${laptop.processor}</td><td>${laptop.ram}</td><td>${laptop.harddrive}</td><td>${laptop.thumbnail_url}</td><td><button class="btn btn-primary" onclick="showEditModal(${laptop.id})">Edit</button><button class="btn btn-danger" onclick="deleteProduct(${laptop.id})">Delete</button></td></tr>`;
 				});
@@ -299,52 +311,52 @@ $(document).ready(function() {
 
         `;
 		$('#main-content').html(contactHtml);
-		
-		
-//
-//		$('#contactForm').submit(function(e) {
-//    e.preventDefault(); // Prevent default form submission
-//
-//    var formData = {
-//        'name': $('#name').val(),
-//        'email': $('#email').val(),
-//        'message': $('#message').val()
-//    };
-//
-//    $.ajax({
-//        type: 'POST',
-//        url: 'https://script.google.com/macros/s/AKfycbxZI0mSKS64TuaCvb53uwmWTUU1KuLXJyAK6sBS8-CPzcdghobLo_pKgIqzl_w-pO3xKQ/exec', // Googel App endpoint URL
-//        data: formData,
-//        success: function(response) {
-//            console.log(response);
-//            alert('Form submitted successfully!');
-//            $('#contactForm').trigger("reset"); // reset form after submission
-//        },
-//        error: function() {
-//            alert('Error submitting form');
-//        }
-//    });
-//});
-		
-		
+
+
+		//
+		//		$('#contactForm').submit(function(e) {
+		//    e.preventDefault(); // Prevent default form submission
+		//
+		//    var formData = {
+		//        'name': $('#name').val(),
+		//        'email': $('#email').val(),
+		//        'message': $('#message').val()
+		//    };
+		//
+		//    $.ajax({
+		//        type: 'POST',
+		//        url: 'https://script.google.com/macros/s/AKfycbxZI0mSKS64TuaCvb53uwmWTUU1KuLXJyAK6sBS8-CPzcdghobLo_pKgIqzl_w-pO3xKQ/exec', // Googel App endpoint URL
+		//        data: formData,
+		//        success: function(response) {
+		//            console.log(response);
+		//            alert('Form submitted successfully!');
+		//            $('#contactForm').trigger("reset"); // reset form after submission
+		//        },
+		//        error: function() {
+		//            alert('Error submitting form');
+		//        }
+		//    });
+		//});
+
+
 	}
 
 
 
 
 
-//	function sendContactForm() {
-//		const formData = {
-//			name: $('#name').val(),
-//			email: $('#email').val(),
-//			message: $('#message').val()
-//		};
-//
-//		// Simulated sending process (add actual AJAX call here)
-//		console.log('Sending contact form:', formData);
-//		alert('Thank you for your message, ' + formData.name + '!');
-//		$('#main-content').html('<h2>Message Received</h2><p>We will contact you soon.</p>');
-//	}
+	//	function sendContactForm() {
+	//		const formData = {
+	//			name: $('#name').val(),
+	//			email: $('#email').val(),
+	//			message: $('#message').val()
+	//		};
+	//
+	//		// Simulated sending process (add actual AJAX call here)
+	//		console.log('Sending contact form:', formData);
+	//		alert('Thank you for your message, ' + formData.name + '!');
+	//		$('#main-content').html('<h2>Message Received</h2><p>We will contact you soon.</p>');
+	//	}
 });
 
 // Function to display the Bootstrap modal for editing a product
@@ -462,12 +474,12 @@ $(document).ready(function() {
 
 
 function loadProductsAdmin() {
-		$.ajax({
-			url: '/Laptop_Store_Web_Project/api/laptops',
-			type: 'GET',
-			dataType: 'json',
-			success: function(data) {
-				$('#main-content').html('<h2>Welcome to the Admin Dashboard</h2>');
+	$.ajax({
+		url: '/Laptop_Store_Web_Project/api/laptops',
+		type: 'GET',
+		dataType: 'json',
+		success: function(data) {
+			$('#main-content').html('<h2>Welcome to the Admin Dashboard</h2>');
 			$('#main-content').append(`
             <div class="card-deck mb-3 text-center">
                 <div class="card mb-4 shadow-sm">
@@ -499,22 +511,22 @@ function loadProductsAdmin() {
                 </div>
             </div>
         `);
-				
-				let contentHtml = '<h2>Products</h2>';
-				contentHtml += '<table class="table"><thead><tr><th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Thumbnail URL</th><th>Actions</th></tr></thead><tbody>';
-				data.forEach(function(laptop) {
-					contentHtml += `<tr><td>${laptop.prodtype}</td><td>${laptop.model}</td><td>${laptop.brand}</td><td>$${laptop.price}</td><td>${laptop.processor}</td><td>${laptop.ram}</td><td>${laptop.harddrive}</td><td>${laptop.thumbnail_url}</td><td><button class="btn btn-primary" onclick="showEditModal(${laptop.id})">Edit</button><button class="btn btn-danger" onclick="deleteProduct(${laptop.id})">Delete</button></td></tr>`;
-				});
-				contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop </button>';
-				$('#main-content').append(contentHtml);
-				$('#totalLaptops').text(data.length);
-			},
-			error: function() {
-				$('#main-content').html('<h2>Error loading products.</h2>');
-				$('#totalLaptops').text('Error'); // Show error if there is a problem fetching data
-			}
-		});
-	}
+
+			let contentHtml = '<h2>Products</h2>';
+			contentHtml += '<table class="table"><thead><tr><th>Product Type</th><th>Model</th><th>Brand</th><th>Price</th><th>Processor</th><th>RAM</th><th>Hard Drive</th><th>Thumbnail URL</th><th>Actions</th></tr></thead><tbody>';
+			data.forEach(function(laptop) {
+				contentHtml += `<tr><td>${laptop.prodtype}</td><td>${laptop.model}</td><td>${laptop.brand}</td><td>$${laptop.price}</td><td>${laptop.processor}</td><td>${laptop.ram}</td><td>${laptop.harddrive}</td><td>${laptop.thumbnail_url}</td><td><button class="btn btn-primary" onclick="showEditModal(${laptop.id})">Edit</button><button class="btn btn-danger" onclick="deleteProduct(${laptop.id})">Delete</button></td></tr>`;
+			});
+			contentHtml += '</tbody></table><button class="btn btn-success" data-toggle="modal" data-target="#addProductModal">Add New Laptop </button>';
+			$('#main-content').append(contentHtml);
+			$('#totalLaptops').text(data.length);
+		},
+		error: function() {
+			$('#main-content').html('<h2>Error loading products.</h2>');
+			$('#totalLaptops').text('Error'); // Show error if there is a problem fetching data
+		}
+	});
+}
 
 
 
@@ -533,30 +545,30 @@ function filterProducts() {
 
 function addProduct() {
 	const apiUrl = '/Laptop_Store_Web_Project/api/laptops';
-    var laptop = {
-        prodtype: $('#prodtype').val(),
-        model: $('#model').val(),
-        brand: $('#brand').val(),
-        price: $('#price').val(),
-        processor: $('#processor').val(),
-        ram: $('#ram').val(),
-        harddrive: $('#harddrive').val(),
-        thumbnail_url: $('#thumbnail_url').val()
-    };
+	var laptop = {
+		prodtype: $('#prodtype').val(),
+		model: $('#model').val(),
+		brand: $('#brand').val(),
+		price: $('#price').val(),
+		processor: $('#processor').val(),
+		ram: $('#ram').val(),
+		harddrive: $('#harddrive').val(),
+		thumbnail_url: $('#thumbnail_url').val()
+	};
 
-    $.ajax({
-        url: apiUrl,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(laptop),
-        success: function() {
-            $('#addProductModal').modal('hide'); // Hide the modal
-            loadProductsAdmin(); // Reload the list of products
-        },
-        error: function() {
-            alert('Error adding product.');
-        }
-    });
+	$.ajax({
+		url: apiUrl,
+		type: 'POST',
+		contentType: 'application/json',
+		data: JSON.stringify(laptop),
+		success: function() {
+			$('#addProductModal').modal('hide'); // Hide the modal
+			loadProductsAdmin(); // Reload the list of products
+		},
+		error: function() {
+			alert('Error adding product.');
+		}
+	});
 }
 
 

@@ -51,20 +51,65 @@ html, body {
     flex: 1;
 }
 
-footer { /* Assuming your footer tag */
+footer { 
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 0;
 }
 
+/* for Admin Dashboard */
+.card-header1 {
+    background-color: blueviolet;
+    color: white;
+}
 
-/*footer {*/
-/*    text-align: center;*/
-/*    padding: 10px 0;*/
-/*    background-color: #333;*/
-/*    color: white;*/
-/*    position: absolute;*/
-/*    width: 100%;*/
-/*    bottom: 0;*/
-/*}*/
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+}
+
+.card-body h1 {
+    color: #28a745; /* A green color for figures */
+}
+
+/* Additional spacing for better layout */
+.card-deck .card {
+    margin-bottom: 20px;
+}
+
+/* Style for the top header of the dashboard */
+#admin-header {
+    background-color: #8c797d; /* A nice gray background */
+    color: white;
+    padding: 20px;
+    font-size: 1.5em;
+}
+
+/* Admin Dashboard Data Table Row Styling */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa; /* Light gray color for odd rows */
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #e9ecef; /* Slightly darker shade of gray for even rows */
+}
+
+
+/* Button colors for actions */
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary blue */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Bootstrap danger red */
+}
+
+.btn-success {
+    background-color: #28a745; /* Bootstrap success green */
+}
+

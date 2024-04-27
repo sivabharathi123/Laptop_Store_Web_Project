@@ -5,18 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionHelper {
-	
+
 	private String url;
 	private static ConnectionHelper instance;
-	
-	private ConnectionHelper()
-	{
-    	String driver = null;
+
+	private ConnectionHelper() {
+		String driver = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			url = "jdbc:mysql://localhost:3306/laptopstore?user=root";
-			driver="com.mysql.jdbc.Driver";
-            Class.forName(driver);
+			driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +29,7 @@ public class ConnectionHelper {
 			return DriverManager.getConnection(instance.url);
 		} catch (SQLException e) {
 			throw e;
-		} 
+		}
 	}
 
 	public static void close(Connection connection) {

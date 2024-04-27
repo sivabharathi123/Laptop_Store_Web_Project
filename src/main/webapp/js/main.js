@@ -122,7 +122,7 @@ $(document).ready(function() {
 			dataType: 'json',
 			success: function(data) {
 				$('#main-content').html('<div id="admin-header">Welcome to the Admin Dashboard</div>');
-		        $('#main-content').append(`
+				$('#main-content').append(`
 		            <div class="card-deck mb-3 text-center">
 		                <div class="card mb-4 shadow-sm">
 		                    <div class="card-header1">

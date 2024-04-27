@@ -4,96 +4,95 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Laptop {
-	
-		private int id;
 
-		private String prodtype;
-	    
-	    private String model;
-	    
-	    private String brand;
+	private int id;
 
-	    private double price;
-	    
-	    private String processor;
-	    
-	    private String ram;
-	    
-	    private String harddrive;
-	    
-	    private String thumbnail_url;
+	private String prodtype;
 
-		public String getThumbnail_url() {
-			return thumbnail_url;
-		}
+	private String model;
 
-		public void setThumbnail_url(String thumbnail_url) {
-			this.thumbnail_url = thumbnail_url;
-		}
+	private String brand;
 
-		public String getModel() {
-			return model;
-		}
+	private double price;
 
-		public void setModel(String model) {
-			this.model = model;
-		}
+	private String processor;
 
-		public String getBrand() {
-			return brand;
-		}
+	private String ram;
 
-		public void setBrand(String brand) {
-			this.brand = brand;
-		}
-		
-		
-		public int getId() {
-			return id;
-		}
+	private String harddrive;
 
-		public void setId(int id) {
-			this.id = id;
-		}
+	private String thumbnail_url;
 
-		public String getProdtype() {
-			return prodtype;
-		}
+	public String getThumbnail_url() {
+		return thumbnail_url;
+	}
 
-		public void setProdtype(String prodtype) {
-			this.prodtype = prodtype;
-		}
+	public void setThumbnail_url(String thumbnail_url) {
+		this.thumbnail_url = thumbnail_url;
+	}
 
-		public double getPrice() {
-			return price;
-		}
+	public String getModel() {
+		return model;
+	}
 
-		public void setPrice(double price) {
-			this.price = price;
-		}
+	public void setModel(String model) {
+		this.model = model;
+	}
 
-		public String getProcessor() {
-			return processor;
-		}
+	public String getBrand() {
+		return brand;
+	}
 
-		public void setProcessor(String processor) {
-			this.processor = processor;
-		}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 
-		public String getRam() {
-			return ram;
-		}
+	public int getId() {
+		return id;
+	}
 
-		public void setRam(String ram) {
-			this.ram = ram;
-		}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-		public String getHarddrive() {
-			return harddrive;
-		}
+	public String getProdtype() {
+		return prodtype;
+	}
 
-		public void setHarddrive(String harddrive) {
-			this.harddrive = harddrive;
-		}
+	public void setProdtype(String prodtype) {
+		this.prodtype = prodtype;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getProcessor() {
+		return processor;
+	}
+
+	public void setProcessor(String processor) {
+		this.processor = processor;
+	}
+
+	public String getRam() {
+		return ram;
+	}
+
+	public void setRam(String ram) {
+		this.ram = ram;
+	}
+
+	public String getHarddrive() {
+		return harddrive;
+	}
+
+	public void setHarddrive(String harddrive) {
+		this.harddrive = harddrive;
+	}
 
 }

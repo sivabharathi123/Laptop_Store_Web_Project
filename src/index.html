@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Laptop Store</title>
+	<link rel="stylesheet" href="main/webapp/styles/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="main/webapp/js/jquery.js"></script>
+	<script type="text/javascript" src="main/webapp/js/main.js"></script>
+</head>
+
+<body>
+	<header>
+		<h1>Laptop Store</h1>
+		<nav>
+			<ul id="navbar">
+				<li><a href="#home" class="active">Home</a></li>
+				<li><a href="#products">Products</a></li>
+				<li><a href="#admin">Admin Dashboard</a></li>
+				<li><a href="#contact">Contact Us</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div id="main-content">
+		<!-- Content dynamically loaded here -->
+	</div>
+	<!-- Add Product Modal -->
+	<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addProductModalLabel">Add New Laptop</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="addLaptopForm">
+						<div class="form-group">
+							<label for="prodtype">Product Type</label>
+							<input type="text" class="form-control" id="prodtype" required>
+						</div>
+						<div class="form-group">
+							<label for="model">Model</label>
+							<input type="text" class="form-control" id="model" required>
+						</div>
+						<div class="form-group">
+							<label for="brand">Brand</label>
+							<input type="text" class="form-control" id="brand" required>
+						</div>
+						<div class="form-group">
+							<label for="price">Price</label>
+							<input type="number" class="form-control" id="price" required>
+						</div>
+						<div class="form-group">
+							<label for="processor">Processor</label>
+							<input type="text" class="form-control" id="processor" required>
+						</div>
+						<div class="form-group">
+							<label for="ram">RAM</label>
+							<input type="text" class="form-control" id="ram" required>
+						</div>
+						<div class="form-group">
+							<label for="harddrive">Hard Drive</label>
+							<input type="text" class="form-control" id="harddrive" required>
+						</div>
+						<div class="form-group">
+							<label for="thumbnail_url">Thumbnail URL</label>
+							<input type="text" class="form-control" id="thumbnail_url" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" onclick="addProduct()">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer>
+		<p>&copy; 2024 Laptop Store. All rights reserved.</p>
+	</footer>
+
+	<!--    <script src="js/main.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="main/webapp/js/main.js"></script>
+</body>
+
+</html>
